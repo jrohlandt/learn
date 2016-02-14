@@ -1,10 +1,7 @@
 window.onload = function () {
     var numberBlock = document.getElementById("number_block");
-
     var screen = document.getElementById("screen");
-
-    var values = [0,1,2,3,4,5,6,7,8,9,"point","division","multiplication","subtraction","addition"];
-
+    
     var buttons = {
         0: {value: 0, type: "number"},
         1: {value: 1, type: "number"},
