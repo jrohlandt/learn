@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Scrambler</title>
+        <link rel="stylesheet" href="normalize.css">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+    <div id="wrapper">
+        <div id="content">
+            <section id="main">
+                <h1>Word Scrambler</h1>
+
+                <form id="scramble_form" action="" method="post">
+                    <label for="user_text">Paste your text here</label>
+                    <input type="textarea" id="user_text" value="">
+                    <input type="submit" name="scramble_submit" id="scramble_submit" value="Scramble">
+                </form>
+            </section>
+
+            <div id="result"></div>
+            <button id="copy_to_clipboard">Copy to clipboard</button>
+        </div>
+
+    </div>
+    <script src="scripts.js"></script>
+    </body>
+</html>
