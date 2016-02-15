@@ -18,24 +18,6 @@ window.onload = function () {
         addition: {value: "+", type: "operator"},
     };
 
-
-    for (index in buttons) {
-
-        if (!buttons.hasOwnProperty(index)) {
-            continue;
-        }
-
-        (function () {
-            var buttonObj = buttons[index];
-            var buttonId = buttonObj.type+"_"+index;
-            var button = document.getElementById(buttonId);
-
-            button.addEventListener("click", function (event) {
-                screen.value += buttons[button.value].value;
-            });
-        }());
-    }
-
     var calculations = {
         division: {
             symbol: "/",
@@ -64,9 +46,35 @@ window.onload = function () {
 
     };
 
-    function calculate (int1, int2, operator) {
-        console.log(int1, int2, operator);
 
+    function addEventListenersForButtons() {
+
+        var index;
+        for (index in buttons) {
+            if (!buttons.hasOwnProperty(index)) { continue; }
+
+            (function () {
+                var buttonObj = buttons[index];
+                var buttonId = buttonObj.type+"_"+index;
+                var button = document.getElementById(buttonId);
+
+                button.addEventListener("click", function (event) {
+                    screen.value += buttons[button.value].value;
+                });
+            }());
+        }
+
+        var equalsButton = document.getElementById("operator_equals");
+        equalsButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            calculateAnswer();
+        });
+    }
+
+    function calculate (int1, int2, operator) {
+        console.log("calculate: ", int1, int2, operator);
+
+        var index;
         for (index in calculations) {
             if (!calculations.hasOwnProperty(index)) {
                 continue;
@@ -79,32 +87,24 @@ window.onload = function () {
         return false;
     }
 
-    document.getElementById("operator_equals").addEventListener("click", function (event) {
-        event.preventDefault();
+    function getNumbersAndOperators (sum) {
 
-        // 9*2/4+6-3
-        var sum = screen.value;
-        console.log(sum);
+        // e.g. 9*2/4+6-3
+        console.log("getNumbersAndOperators: ", sum);
 
         var characters = sum.split("");
-        console.log(characters);
+        console.log("characters: ", characters);
 
         var numbers = [];
         var operators = [];
         for (var i = 0; i < characters.length; i++) {
-            var char = characters[i];
-            //if (isNaN(parseInt(char))) {
-            //    operators.push(char);
-            //} else {
-            //    // todo handle multi char numbers
-            //    numbers.push(parseInt(char));
-            //}
             var number = "";
             while (!isNaN(parseInt(characters[i])) || (characters[i] === ".")) {
                 number += characters[i];
                 i++;
             }
 
+            // get numbers
             if (!isNaN(parseInt(number))) {
                 numbers.push(parseInt(number));
             }
@@ -113,21 +113,49 @@ window.onload = function () {
                 continue;
             }
 
+            // get operators
             if (isNaN(parseInt(characters[i]))) {
                 operators.push(characters[i]);
             }
         }
 
+        return {numbers: numbers, operators: operators};
+    }
+
+    function calculateAnswer () {
+        var arr = getNumbersAndOperators(screen.value);
+        var numbers = arr.numbers;
+        var operators = arr.operators;
+
         var answer = 0;
-        for (var i = 0; i < numbers.length; i = i+2) {
-            //console.log(i);
-            var oi = operatorIterator = (i < 2) ? i : (i - 1);
+        //for (var i = 0; i < numbers.length;(i === 0) ? i+2 : i++) {
+
+        var i = 0;
+        var index;
+        for (index in numbers) {
+            // operator increment
+            var oi = (i === 0) ? i : (i - 1);
+
+            console.log("i: ", i);
+            console.log("oi: ", oi);
+
+            // int1: first loop it is first number, from 2nd loop on it is answer
             var int1 = (i === 0) ? numbers[i] : answer;
-            var int2 = (i === numbers.length - 1) ? numbers[i] : numbers[i+1];
+
+            // int2: if i is equal to last array index, use as is. Else add 1.
+            var int2 = (i === 0) ? numbers[i+1] : numbers[i];
+
+            if (i >= numbers.length) { break; }
+
             answer = calculate(int1, int2, operators[oi]);
+
+            i = (i === 0) ? i+2 : i+1;
         }
 
-        console.log(numbers, operators, answer);
+        screen.value = answer;
+        console.log("numbers: ", numbers, "operators: ", operators, "answer: "+answer);
+    }
 
-    });
+    addEventListenersForButtons();
+
 };
