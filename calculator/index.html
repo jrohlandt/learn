@@ -8,39 +8,42 @@
 <body>
     <div id="calculator">
         <h5>Casio <small>486</small></h5>
-        <form action="" method="post">
-            <div id="screen_block">
+        <div id="screen_block">
+            <form action="" method="post">
                 <input type="text" name="screen" id="screen" value="">
-                <button id="operator_equals" name="equals" value="equals">=</button>
+            </form>
+        </div>
+        <div id="numbers_and_operators">
+            <div id="number_block">
+                <div class="number_row">
+                    <button id="number_7" value="7">7</button>
+                    <button id="number_8" value="8">8</button>
+                    <button id="number_9" value="9">9</button>
+                </div>
+                <div class="number_row">
+                    <button id="number_4" value="4">4</button>
+                    <button id="number_5" value="5">5</button>
+                    <button id="number_6" value="6">6</button>
+                </div>
+                <div class="number_row">
+                    <button id="number_1" value="1">1</button>
+                    <button id="number_2" value="2">2</button>
+                    <button id="number_3" value="3">3</button>
+                </div>
+                <div class="number_row">
+                    <button id="number_0" value="0">0</button>
+                    <button id="number_point" value="point">.</button>
+                </div>
             </div>
-        </form>
-        <div id="number_block">
-            <div class="number_row">
-                <button id="number_7" value="7">7</button>
-                <button id="number_8" value="8">8</button>
-                <button id="number_9" value="9">9</button>
-            </div>
-            <div class="number_row">
-                <button id="number_4" value="4">4</button>
-                <button id="number_5" value="5">5</button>
-                <button id="number_6" value="6">6</button>
-            </div>
-            <div class="number_row">
-                <button id="number_1" value="1">1</button>
-                <button id="number_2" value="2">2</button>
-                <button id="number_3" value="3">3</button>
-            </div>
-            <div class="number_row">
-                <button id="number_0" value="0">0</button>
-                <button id="number_point" value="point">.</button>
+            <div class="operator_row">
+                <button id="operator_division" value="division">/</button>
+                <button id="operator_multiplication" value="multiplication">*</button>
+                <button id="operator_subtraction" value="subtraction">-</button>
+                <button id="operator_addition" value="addition">+</button>
             </div>
         </div>
-        <div class="operator_row">
-            <button id="operator_division" value="division">/</button>
-            <button id="operator_multiplication" value="multiplication">*</button>
-            <button id="operator_subtraction" value="subtraction">-</button>
-            <button id="operator_addition" value="addition">+</button>
-        </div>
+
+
     </div>
     <script src="main.js"></script>
 </body>

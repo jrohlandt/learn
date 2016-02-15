@@ -1,3 +1,7 @@
+button {
+    width:22px;
+    height: 22px;
+}
 #calculator {
     border: solid thin #ccc;
     height: 400px;
@@ -10,13 +14,15 @@
 }
 
 .number_row {
-    margin: 5px;
+    margin:5px;
 }
 
 .operator_row {
+    margin: 5px 5px 5px 0;
     width:20px;
+    float:right;
 }
 
-.operator_row button {
-    /*float:left;*/
+#numbers_and_operators {
+    width: 130px;
 }
