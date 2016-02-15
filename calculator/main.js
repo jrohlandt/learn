@@ -99,14 +99,16 @@ window.onload = function () {
         var operators = [];
         for (var i = 0; i < characters.length; i++) {
             var number = "";
-            while (!isNaN(parseInt(characters[i])) || (characters[i] === ".")) {
+            while (!isNaN(parseInt(characters[i], 10)) || (characters[i] === ".")) {
                 number += characters[i];
                 i++;
             }
 
             // get numbers
-            if (!isNaN(parseInt(number))) {
-                numbers.push(parseInt(number));
+            if (!isNaN(parseInt(number), 10)) {
+
+                number = (number % 1 === 0) ? parseInt(number, 10) : parseFloat(number);
+                numbers.push(number);
             }
 
             if (i >= characters.length) {
@@ -114,7 +116,7 @@ window.onload = function () {
             }
 
             // get operators
-            if (isNaN(parseInt(characters[i]))) {
+            if (isNaN(parseInt(characters[i]), 10)) {
                 operators.push(characters[i]);
             }
         }
