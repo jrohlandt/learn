@@ -64,6 +64,7 @@ window.onload = function () {
                 button.addEventListener("click", function (event) {
                     screenSum.dataset.sum += buttons[button.value].value;
                     screenSum.children[0].innerHTML += buttons[button.value].value;
+                    screenAnswer.children[0].innerHTML = buttons[button.value].value;
                 });
             }());
         }
@@ -130,9 +131,9 @@ window.onload = function () {
 
     function calculateAnswer () {
 
-        var sum = screenSum;
+        var sum = screenSum.dataset.sum;
 
-        var arr = getNumbersAndOperators(screen.value);
+        var arr = getNumbersAndOperators(sum);
         var numbers = arr.numbers;
         var operators = arr.operators;
 
@@ -161,7 +162,7 @@ window.onload = function () {
             i = (i === 0) ? i+2 : i+1;
         }
 
-        screen.value = answer;
+        screenAnswer.children[0].innerHTML = answer;
         console.log("numbers: ", numbers, "operators: ", operators, "answer: "+answer);
     }
 
