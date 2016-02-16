@@ -8,6 +8,33 @@ button {
     width: 300px;
 }
 
+#screen {
+    width:220px;
+    height:50px;
+    border: solid thin #cccccc;
+}
+
+#screen_sum {
+    width:200px;
+    font-size: 1em;
+}
+
+#screen_sum span {
+    min-width: 20px;
+    height:1em;
+    float: right;
+}
+
+#screen_answer {
+    width:200px;
+    font-size: 1.5em;
+}
+
+#screen_answer span {
+    clear:both;
+    float: right;
+}
+
 #number_block {
     float:left;
     width:100px;

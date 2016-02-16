@@ -1,5 +1,8 @@
 window.onload = function () {
-    var screen = document.getElementById("screen");
+
+    var screenSum = document.getElementById("screen_sum");
+    //console.log(screenSum.children[0]);
+    var screenAnswer = document.getElementById("screen_answer");
     var buttons = {
         0: {value: 0, type: "number"},
         1: {value: 1, type: "number"},
@@ -59,12 +62,13 @@ window.onload = function () {
                 var button = document.getElementById(buttonId);
 
                 button.addEventListener("click", function (event) {
-                    screen.value += buttons[button.value].value;
+                    screenSum.dataset.sum += buttons[button.value].value;
+                    screenSum.children[0].innerHTML += buttons[button.value].value;
                 });
             }());
         }
 
-        var equalsButton = document.getElementById("operator_equals");
+        var equalsButton = document.getElementById("action_equals");
         equalsButton.addEventListener("click", function (event) {
             event.preventDefault();
             calculateAnswer();
@@ -125,6 +129,9 @@ window.onload = function () {
     }
 
     function calculateAnswer () {
+
+        var sum = screenSum;
+
         var arr = getNumbersAndOperators(screen.value);
         var numbers = arr.numbers;
         var operators = arr.operators;
