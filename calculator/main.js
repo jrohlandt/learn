@@ -54,13 +54,16 @@ window.onload = function () {
 
         var index;
         for (index in buttons) {
-            if (!buttons.hasOwnProperty(index)) { continue; }
+            if (!buttons.hasOwnProperty(index)) {
+                continue;
+            }
 
             (function () {
+
+                // add listeners for number and operator buttons
                 var buttonObj = buttons[index];
                 var buttonId = buttonObj.type+"_"+index;
                 var button = document.getElementById(buttonId);
-
                 button.addEventListener("click", function (event) {
                     screenSum.dataset.sum += buttons[button.value].value;
                     screenSum.children[0].innerHTML += buttons[button.value].value;
@@ -69,6 +72,7 @@ window.onload = function () {
             }());
         }
 
+        // add listener for Equals Button
         var equalsButton = document.getElementById("action_equals");
         equalsButton.addEventListener("click", function (event) {
             event.preventDefault();

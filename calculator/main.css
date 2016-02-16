@@ -2,6 +2,10 @@
     width:22px;
     height: 22px;
 }*/
+body {
+    font-family: arial;
+    font-weight: bold;
+}
 
 [role="button"],
 input[type="submit"],
@@ -15,17 +19,17 @@ button {
 
 /* Reset `button`  */
 
-/*button {
+button {
     background: none;
     border: 0;
     color: inherit;
-    /!* cursor: default; *!/
+    /* cursor: default; */
     font: inherit;
     line-height: normal;
     overflow: visible;
     padding: 0;
-    -webkit-appearance: button; /!* for input *!/
-    -webkit-user-select: none; /!* for button *!/
+    -webkit-appearance: button; /* for input */
+    -webkit-user-select: none; /* for button */
     -moz-user-select: none;
     -ms-user-select: none;
 }
@@ -44,45 +48,101 @@ button {
     margin: 0.25em;
     padding: 0 1em;
     width: 1.5em;
-}*/
+}
+
+
+#buttons button {
+    font-weight: bold;
+    /*font-family: verdana;*/
+    /*width: 225px;*/
+}
+
+
+
+.operator_row button {
+    background-color: darkgray;
+    color:white;
+    height:2.8em;
+    border:1px solid rgba(0, 0, 0, 0.2);
+}
+
+.operator_row button:hover {
+    background-color: dimgray;
+    color:rgba(255,255,255, .5);
+}
 
 
 #calculator {
-    border: solid thin #ccc;
+    margin:3em;
+    border: solid 1px #ccc;
     height: 400px;
-    width: 300px;
+    width: 400px;
+    border-radius: .5em;
+    background-color: rgba(0,0,0,0.02)
+}
+
+#calculator h3 {
+    margin:25px;
+    font-family: arial;
+    color: darkgray;
+
 }
 
 #screen {
-    width:220px;
-    height:50px;
+    width:350px;
+    height:75px;
+    margin:auto;
     border: solid thin #cccccc;
+    border-radius: 0.5em;
+    background-color: azure;
 }
 
 #screen_sum {
-    width:200px;
+    width:100%;
     font-size: 1em;
+    color: darkgray;
 }
 
 #screen_sum span {
-    min-width: 20px;
+    padding:5px;
     height:1em;
+    line-height: 1em;
     float: right;
 }
 
 #screen_answer {
-    width:200px;
-    font-size: 1.5em;
+    width:100%;
 }
 
 #screen_answer span {
     clear:both;
     float: right;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    padding:5px;
 }
 
 #number_block {
     float:left;
-    width:100%;
+    width:220px;
+    margin-left:20px;
+}
+
+#number_block button {
+    border: 1px solid rgba(0,0,0,0.15);
+}
+#number_block button:hover {
+    background-color: silver;
+}
+
+button#action_equals {
+    color: white;
+    background-color: cornflowerblue;
+}
+
+button#action_equals:hover {
+    color: white;
+    background-color: lightskyblue;
 }
 
 .number_row {
@@ -90,11 +150,8 @@ button {
 }
 
 .operator_row {
-    margin: 5px 5px 5px 0;
-    width:20px;
+    width:65px;
+    height:350px;
     float:right;
-}
-
-#numbers_and_operators {
-    width: 130px;
+    margin: 5px 95px 5px 0;
 }
