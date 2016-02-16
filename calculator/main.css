@@ -104,7 +104,7 @@ button {
 }
 
 #screen_sum span {
-    padding:5px;
+    padding:10px 15px 0 5px;
     height:1em;
     line-height: 1em;
     float: right;
@@ -119,7 +119,7 @@ button {
     float: right;
     font-size: 1.5em;
     line-height: 1.5em;
-    padding:5px;
+    padding:5px 15px 0 5px;
 }
 
 #number_block {
