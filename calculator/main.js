@@ -78,6 +78,20 @@ window.onload = function () {
             event.preventDefault();
             calculateAnswer();
         });
+
+        var sqrtButton = document.getElementById("action_sqrt");
+        sqrtButton.addEventListener("click", function (event) {
+           event.preventDefault();
+           calculateAnswer("sqrt");
+        });
+
+        var clearButton = document.getElementById("action_clear");
+        clearButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            screenSum.dataset.sum = "";
+            screenSum.children[0].innerHTML = "";
+            screenAnswer.children[0].innerHTML = "";
+        });
     }
 
     function calculate (int1, int2, operator) {
@@ -133,40 +147,49 @@ window.onload = function () {
         return {numbers: numbers, operators: operators};
     }
 
-    function calculateAnswer () {
+    function calculateAnswer (action) {
 
         var sum = screenSum.dataset.sum;
-
         var arr = getNumbersAndOperators(sum);
         var numbers = arr.numbers;
         var operators = arr.operators;
 
+        //console.log("operators length: ", operators.length);
+
         var answer = 0;
-        //for (var i = 0; i < numbers.length;(i === 0) ? i+2 : i++) {
+
+
+
 
         var i = 0;
-        var index;
-        for (index in numbers) {
-            // operator increment
-            var oi = (i === 0) ? i : (i - 1);
 
-            console.log("i: ", i);
-            console.log("oi: ", oi);
+        if (operators.length === 0) {
+            answer = numbers[0];
+            return;
+        } else {
+            var index;
+            for (index in numbers) {
+                // operator increment
+                var oi = (i === 0) ? i : (i - 1);
 
-            // int1: first loop it is first number, from 2nd loop on it is answer
-            var int1 = (i === 0) ? numbers[i] : answer;
+                console.log("i: ", i);
+                console.log("oi: ", oi);
 
-            // int2: if i is equal to last array index, use as is. Else add 1.
-            var int2 = (i === 0) ? numbers[i+1] : numbers[i];
+                // int1: first loop it is first number, from 2nd loop on it is answer
+                var int1 = (i === 0) ? numbers[i] : answer;
 
-            if (i >= numbers.length) { break; }
+                // int2: if i is equal to last array index, use as is. Else add 1.
+                var int2 = (i === 0) ? numbers[i+1] : numbers[i];
 
-            answer = calculate(int1, int2, operators[oi]);
+                if (i >= numbers.length) { break; }
 
-            i = (i === 0) ? i+2 : i+1;
+                answer = calculate(int1, int2, operators[oi]);
+
+                i = (i === 0) ? i+2 : i+1;
+            }
         }
 
-        screenAnswer.children[0].innerHTML = answer;
+        screenAnswer.children[0].innerHTML = (action === "sqrt") ? Math.sqrt(answer) : answer;
         console.log("numbers: ", numbers, "operators: ", operators, "answer: "+answer);
     }
 
