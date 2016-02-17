@@ -165,7 +165,6 @@ window.onload = function () {
 
         if (operators.length === 0) {
             answer = numbers[0];
-            return;
         } else {
             var index;
             for (index in numbers) {
