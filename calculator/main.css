@@ -50,6 +50,10 @@ button {
     width: 1.5em;
 }
 
+#buttons {
+    margin:auto;
+
+}
 
 #buttons button {
     font-weight: bold;
