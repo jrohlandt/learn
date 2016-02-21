@@ -81,9 +81,10 @@ window.onload = function () {
         var day = di;
         var dayName = weekDays[wi].name;
 
-        wi =  (wi > 0) ? (wi - 1) : 6;
+
         //console.log(day, dayName);
-        before.unshift({day: day, name: dayName});
+        before.unshift({day: day, number: wi, name: dayName});
+        wi =  (wi > 0) ? (wi - 1) : 6;
         di--;
     }
 
@@ -96,12 +97,54 @@ window.onload = function () {
         var day = i;
         var dayName = weekDays[wii].name;
 
-        wii =  (wii < 6) ? (wii + 1) : 0;
         //console.log(day, dayName);
-        before.push({day: day, name: dayName});
+        before.push({day: day, number: wii, name: dayName});
+        wii =  (wii < 6) ? (wii + 1) : 0;
         i++;
     }
 
-    console.log(before.concat(after));
+    var daysOfTheMonth = before.concat(after);
+    console.log(daysOfTheMonth);
+    var index;
+    var firstDayOfTheMonth = "not_set";
+    var row = "";
+    var wdi = 0;
+    for (index in daysOfTheMonth) {
+        if (!daysOfTheMonth.hasOwnProperty(index)) {
+            continue;
+        }
 
+        if (wdi === 0) {
+            row += "<tr>";
+        }
+        console.log(1);
+        if (firstDayOfTheMonth === "not_set") {
+            console.log(2);
+            firstDayOfTheMonth = daysOfTheMonth[index].number;
+        }
+
+        var i = 0;
+        var val = "";
+
+        // if is int
+        if (!isNaN(parseInt(firstDayOfTheMonth))) {
+            console.log(firstDayOfTheMonth);
+            wdi = firstDayOfTheMonth;
+            for (var e = 0; e < firstDayOfTheMonth; e++) {
+                row += "<td></td>";
+            }
+        }
+
+        row += "<td>"+daysOfTheMonth[index].day+"</td>";
+
+        if (wdi === 6) {
+            row += "</tr>";
+        }
+        firstDayOfTheMonth = "done";
+        wdi = (wdi === 6) ? 0 : (wdi + 1);
+    }
+
+    var calendarTbody = document.getElementById("calendar_tbody");
+
+    calendarTbody.innerHTML = row;
 };
