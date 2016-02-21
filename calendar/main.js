@@ -135,7 +135,12 @@ window.onload = function () {
             }
         }
 
-        row += "<td>"+daysOfTheMonth[index].day+"</td>";
+        if (daysOfTheMonth[index].day === dayOfMonth) {
+            row += "<td style='color: blue; font-weight: bold;'>";
+        } else {
+            row += "<td>";
+        }
+        row += daysOfTheMonth[index].day+"</td>";
 
         if (wdi === 6) {
             row += "</tr>";
@@ -144,6 +149,8 @@ window.onload = function () {
         wdi = (wdi === 6) ? 0 : (wdi + 1);
     }
 
+    var heading = document.getElementById("heading");
+    heading.innerHTML = months[month].name + " " + year;
     var calendarTbody = document.getElementById("calendar_tbody");
 
     calendarTbody.innerHTML = row;
