@@ -33,29 +33,27 @@ window.onload = function () {
 
 
     function getDaysOfTheMonth(date, currMonth) {
-
         if (currMonth !== false) {
             currMonth = true;
         }
         var today = new Date();
         var todaysDate = false;
 
-        //
         if (today.getFullYear() === date.getFullYear()) {
             if (today.getMonth() === date.getMonth()) {
                 if (today.getDate() === date.getDate()) {
                     todaysDate = date.getDate();
                 }
             }
-
         }
 
+        // todo dont change global values
         year = date.getFullYear();
         month = date.getMonth();
         var firstDayOfMonth = new Date(year, month, 1);
         var lastDayOfMonth = new Date(year, month + 1, 0);
-        var lastDayOfYear = new Date(year + 1, 0, 0);
-        var firstDayOfYear = new Date(year, 0, 1);
+        var lastDayOfYear = new Date(year + 1, 0, 0); // example for reference only
+        var firstDayOfYear = new Date(year, 0, 1); // example for reference only
 
         var days = [];
         var dayOfMonth = firstDayOfMonth.getDate();
@@ -72,12 +70,10 @@ window.onload = function () {
             dayOfWeek = (dayOfWeek === 6) ? 0 : (dayOfWeek + 1);
             dayOfMonth++;
         }
-
         return days;
     }
 
     function getPrevMonth(date) {
-
         var d = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
         return getDaysOfTheMonth(d, false);
     }
@@ -87,24 +83,17 @@ window.onload = function () {
         return getDaysOfTheMonth(date, false);
     }
 
+    //grid 42 (6 rows of 7 days each)
     function getFullGrid(date) {
-
-        //grid 42 (6 rows of 7 days each)
         var prevMonth = getPrevMonth(date);
-
-
         var currMonth = getDaysOfTheMonth(date);
+        var nextMonth = getNextMonth(date);
         var currMonthFirstWeekDay = currMonth[0].weekDay;
         var currMonthLastWeekDay = currMonth[currMonth.length - 1].weekDay;
-
         prevMonth = prevMonth.slice((prevMonth.length) - currMonthFirstWeekDay);
-        console.log("prevMonth: ",prevMonth);
-        var nextMonth = getNextMonth(date);
         nextMonth = nextMonth.slice(0, 13 - currMonthLastWeekDay);
         var grid = prevMonth.concat(currMonth, nextMonth);
-        grid = grid.slice(0, 42)
-        console.log("grid : ", grid);
-        console.log(prevMonth.slice(-currMonthFirstWeekDay));
+        grid = grid.slice(0, 42);
 
         return grid;
     }
@@ -145,14 +134,6 @@ window.onload = function () {
         if (firstDayOfTheMonth === "not_set") {
             firstDayOfTheMonth = daysOfTheMonth[index].weekDay;
         }
-
-        // if is int
-        /*if (!isNaN(parseInt(firstDayOfTheMonth))) {
-            wdi = firstDayOfTheMonth;
-            for (var e = 0; e < firstDayOfTheMonth; e++) {
-                row += "<td></td>";
-            }
-        }*/
 
         if (daysOfTheMonth[index].today === true) {
             row += "<td style='color: blue; font-weight: bold;'>";
