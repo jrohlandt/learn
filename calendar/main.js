@@ -32,24 +32,43 @@ window.onload = function () {
     var dayOfMonth = today.getDate();
 
 
-    function getDaysOfTheMonth(date) {
+    function getDaysOfTheMonth(date, currMonth) {
 
+        if (currMonth !== false) {
+            currMonth = true;
+        }
         var today = new Date();
         var todaysDate = false;
-        if (today.getTime() === date.getTime()) {
-            todaysDate = date.getDate();
+
+        //
+        if (today.getFullYear() === date.getFullYear()) {
+            if (today.getMonth() === date.getMonth()) {
+                if (today.getDate() === date.getDate()) {
+                    todaysDate = date.getDate();
+                }
+            }
+
         }
+
         year = date.getFullYear();
         month = date.getMonth();
         var firstDayOfMonth = new Date(year, month, 1);
         var lastDayOfMonth = new Date(year, month + 1, 0);
+        var lastDayOfYear = new Date(year + 1, 0, 0);
+        var firstDayOfYear = new Date(year, 0, 1);
 
         var days = [];
         var dayOfMonth = firstDayOfMonth.getDate();
         var dayOfWeek = firstDayOfMonth.getDay();
 
         while (dayOfMonth <= lastDayOfMonth.getDate()) {
-            days.push({day:dayOfMonth, weekDay: dayOfWeek, name: weekDays[dayOfWeek].name, today:((dayOfMonth === todaysDate) ? true : false)});
+            days.push({
+                day:dayOfMonth,
+                weekDay: dayOfWeek,
+                name: weekDays[dayOfWeek].name,
+                today:(dayOfMonth === todaysDate),
+                currMonth: currMonth
+            });
             dayOfWeek = (dayOfWeek === 6) ? 0 : (dayOfWeek + 1);
             dayOfMonth++;
         }
@@ -57,8 +76,42 @@ window.onload = function () {
         return days;
     }
 
+    function getPrevMonth(date) {
+
+        var d = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
+        return getDaysOfTheMonth(d, false);
+    }
+
+    function getNextMonth(date) {
+        var date = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate())
+        return getDaysOfTheMonth(date, false);
+    }
+
+    function getFullGrid(date) {
+
+        //grid 42 (6 rows of 7 days each)
+        var prevMonth = getPrevMonth(date);
+
+
+        var currMonth = getDaysOfTheMonth(date);
+        var currMonthFirstWeekDay = currMonth[0].weekDay;
+        var currMonthLastWeekDay = currMonth[currMonth.length - 1].weekDay;
+
+        prevMonth = prevMonth.slice((prevMonth.length) - currMonthFirstWeekDay);
+        console.log("prevMonth: ",prevMonth);
+        var nextMonth = getNextMonth(date);
+        nextMonth = nextMonth.slice(0, 13 - currMonthLastWeekDay);
+        var grid = prevMonth.concat(currMonth, nextMonth);
+        grid = grid.slice(0, 42)
+        console.log("grid : ", grid);
+        console.log(prevMonth.slice(-currMonthFirstWeekDay));
+
+        return grid;
+    }
+
+    var daate = new Date(2016, 7);
     var calendar = "";
-    calendar += "<div>"+ months[month].name + " " +year +"</div>"
+    calendar += "<div>"+ months[daate.getMonth()].name + " " + daate.getFullYear() +"</div>"
     calendar += "<table border='1px solid black'>";
     // generate calendar day names row
     var day;
@@ -72,8 +125,10 @@ window.onload = function () {
     dayNamesRow += "</tr></thead>";
     calendar += dayNamesRow;
 
-    var daate = new Date();
-    var daysOfTheMonth = getDaysOfTheMonth(daate);
+
+    //var daysOfTheMonth = getDaysOfTheMonth(daate);
+    var daysOfTheMonth = getFullGrid(daate);
+
     console.log(daysOfTheMonth);
     var firstDayOfTheMonth = "not_set";
     var row = "<tbody>";
@@ -92,15 +147,17 @@ window.onload = function () {
         }
 
         // if is int
-        if (!isNaN(parseInt(firstDayOfTheMonth))) {
+        /*if (!isNaN(parseInt(firstDayOfTheMonth))) {
             wdi = firstDayOfTheMonth;
             for (var e = 0; e < firstDayOfTheMonth; e++) {
                 row += "<td></td>";
             }
-        }
+        }*/
 
         if (daysOfTheMonth[index].today === true) {
             row += "<td style='color: blue; font-weight: bold;'>";
+        } else if (daysOfTheMonth[index].currMonth === false) {
+            row += "<td style='color: grey;'>";
         } else {
             row += "<td>";
         }
