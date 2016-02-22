@@ -98,62 +98,75 @@ window.onload = function () {
         return grid;
     }
 
-    var daate = new Date(2016, 7);
-    var calendar = "";
-    calendar += "<div>"+ months[daate.getMonth()].name + " " + daate.getFullYear() +"</div>"
-    calendar += "<table border='1px solid black'>";
-    // generate calendar day names row
-    var day;
-    var dayNamesRow = "<thead><tr>";
-    for (day in weekDays) {
-        if (!weekDays.hasOwnProperty(day))
-            continue;
 
-        dayNamesRow += "<td>"+weekDays[day].abbreviation+"</td>";
+
+    function calendar(daate) {
+        var calendar = "";
+        calendar += "<div>"+ months[daate.getMonth()].name + " " + daate.getFullYear() +"<button id='next' value='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>next</button></div>"
+        calendar += "<table border='1px solid black'>";
+        // generate calendar day names row
+        var day;
+        var dayNamesRow = "<thead><tr>";
+        for (day in weekDays) {
+            if (!weekDays.hasOwnProperty(day))
+                continue;
+
+            dayNamesRow += "<td>"+weekDays[day].abbreviation+"</td>";
+        }
+        dayNamesRow += "</tr></thead>";
+        calendar += dayNamesRow;
+
+
+        //var daysOfTheMonth = getDaysOfTheMonth(daate);
+        var daysOfTheMonth = getFullGrid(daate);
+
+        console.log(daysOfTheMonth);
+        var firstDayOfTheMonth = "not_set";
+        var row = "<tbody>";
+        var wdi = 0;
+        var index;
+        for (index in daysOfTheMonth) {
+            if (!daysOfTheMonth.hasOwnProperty(index)) {
+                continue;
+            }
+
+            if (wdi === 0) {
+                row += "<tr>";
+            }
+            if (firstDayOfTheMonth === "not_set") {
+                firstDayOfTheMonth = daysOfTheMonth[index].weekDay;
+            }
+
+            if (daysOfTheMonth[index].today === true) {
+                row += "<td style='color: blue; font-weight: bold;'>";
+            } else if (daysOfTheMonth[index].currMonth === false) {
+                row += "<td style='color: grey;'>";
+            } else {
+                row += "<td>";
+            }
+            row += daysOfTheMonth[index].day+"</td>";
+
+            if (wdi === 6) {
+                row += "</tr>";
+            }
+            firstDayOfTheMonth = "done";
+            wdi = (wdi === 6) ? 0 : (wdi + 1);
+        }
+
+        row += "<tbody>";
+
+        calendar += row;
+        document.getElementById("calendar").innerHTML = calendar;
     }
-    dayNamesRow += "</tr></thead>";
-    calendar += dayNamesRow;
 
+    var daate = new Date(2016, 1);
+    calendar(daate);
 
-    //var daysOfTheMonth = getDaysOfTheMonth(daate);
-    var daysOfTheMonth = getFullGrid(daate);
+    var nextButton = document.getElementById("next");
+    nextButton.addEventListener("click", function (event) {
+        console.log(nextButton.value);
+        calendar(new Date(nextButton.value));
 
-    console.log(daysOfTheMonth);
-    var firstDayOfTheMonth = "not_set";
-    var row = "<tbody>";
-    var wdi = 0;
-    var index;
-    for (index in daysOfTheMonth) {
-        if (!daysOfTheMonth.hasOwnProperty(index)) {
-            continue;
-        }
-
-        if (wdi === 0) {
-            row += "<tr>";
-        }
-        if (firstDayOfTheMonth === "not_set") {
-            firstDayOfTheMonth = daysOfTheMonth[index].weekDay;
-        }
-
-        if (daysOfTheMonth[index].today === true) {
-            row += "<td style='color: blue; font-weight: bold;'>";
-        } else if (daysOfTheMonth[index].currMonth === false) {
-            row += "<td style='color: grey;'>";
-        } else {
-            row += "<td>";
-        }
-        row += daysOfTheMonth[index].day+"</td>";
-
-        if (wdi === 6) {
-            row += "</tr>";
-        }
-        firstDayOfTheMonth = "done";
-        wdi = (wdi === 6) ? 0 : (wdi + 1);
-    }
-
-    row += "<tbody>";
-
-    calendar += row;
-    document.getElementById("calendar").innerHTML = calendar;
+    });
 
 };
