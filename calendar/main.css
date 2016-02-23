@@ -1,0 +1,27 @@
+
+#calendar_container {
+    /*width: 350px;*/
+}
+#calendar table {
+    border: 1px solid pink;
+}
+
+#previous {
+    float:left;
+}
+
+#month_year {
+    float:left;
+}
+
+.today {
+    color: #2492ff;
+}
+
+.this_month {
+    color: #5c5c5c;
+}
+
+.not_this_month {
+    color: #a2a2a2;
+}

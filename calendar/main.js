@@ -103,12 +103,13 @@ window.onload = function () {
     function calendarGen(daate) {
         var calendar = "";
 
+        calendar += "<div id='calendar_container'>";
         calendar += "<div>";
         calendar += "<button id='previous' value='"+(new Date(daate.getFullYear(), daate.getMonth() - 1).toDateString())+"'>prev</button>";
-        calendar += months[daate.getMonth()].name + " " + daate.getFullYear();
+        calendar += "<div id='month_year'>"+ months[daate.getMonth()].name + " " + daate.getFullYear() +"</div>";
         calendar += "<button id='next' value='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>next</button>";
         calendar += "</div>";
-        calendar += "<table border='1px solid black'>";
+        calendar += "<table id=''>";
         // generate calendar day names row
         var day;
         var dayNamesRow = "<thead><tr>";
@@ -125,7 +126,7 @@ window.onload = function () {
         //var daysOfTheMonth = getDaysOfTheMonth(daate);
         var daysOfTheMonth = getFullGrid(daate);
 
-        console.log(daysOfTheMonth);
+        //console.log(daysOfTheMonth);
         var firstDayOfTheMonth = "not_set";
         var row = "<tbody>";
         var wdi = 0;
@@ -143,11 +144,11 @@ window.onload = function () {
             }
 
             if (daysOfTheMonth[index].today === true) {
-                row += "<td style='color: blue; font-weight: bold;'>";
+                row += "<td class='today'>";
             } else if (daysOfTheMonth[index].currMonth === false) {
-                row += "<td style='color: grey;'>";
+                row += "<td class='not_this_month'>";
             } else {
-                row += "<td>";
+                row += "<td class='this_month' data-date='"+ daysOfTheMonth[index].day +"' >";
             }
             row += daysOfTheMonth[index].day+"</td>";
 
@@ -161,7 +162,17 @@ window.onload = function () {
         row += "<tbody>";
 
         calendar += row;
+        calendar += "</table>";
+        calendar += "</div>";
+
         document.getElementById("calendar").innerHTML = calendar;
+
+        var activeDates = document.getElementsByClassName("this_month");
+        for (var a = 0; a < activeDates.length; a++) {
+            activeDates[a].addEventListener("click", function () {
+                console.log(this.dataset.date);
+            });
+        }
 
         var prevButton = document.getElementById("previous");
         prevButton.addEventListener("click", function (event) {
