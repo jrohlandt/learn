@@ -100,9 +100,14 @@ window.onload = function () {
 
 
 
-    function calendar(daate) {
+    function calendarGen(daate) {
         var calendar = "";
-        calendar += "<div>"+ months[daate.getMonth()].name + " " + daate.getFullYear() +"<button id='next' value='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>next</button></div>"
+
+        calendar += "<div>";
+        calendar += "<button id='previous' value='"+(new Date(daate.getFullYear(), daate.getMonth() - 1).toDateString())+"'>prev</button>";
+        calendar += months[daate.getMonth()].name + " " + daate.getFullYear();
+        calendar += "<button id='next' value='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>next</button>";
+        calendar += "</div>";
         calendar += "<table border='1px solid black'>";
         // generate calendar day names row
         var day;
@@ -157,16 +162,23 @@ window.onload = function () {
 
         calendar += row;
         document.getElementById("calendar").innerHTML = calendar;
+
+        var prevButton = document.getElementById("previous");
+        prevButton.addEventListener("click", function (event) {
+            console.log(prevButton.value);
+            calendarGen(new Date(prevButton.value));
+        });
+
+        var nextButton = document.getElementById("next");
+        nextButton.addEventListener("click", function (event) {
+            console.log(nextButton.value);
+            calendarGen(new Date(nextButton.value));
+        });
     }
 
-    var daate = new Date(2016, 1);
-    calendar(daate);
+    var daate = new Date();
+    calendarGen(daate);
 
-    var nextButton = document.getElementById("next");
-    nextButton.addEventListener("click", function (event) {
-        console.log(nextButton.value);
-        calendar(new Date(nextButton.value));
 
-    });
 
 };
