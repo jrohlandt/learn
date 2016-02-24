@@ -105,9 +105,11 @@ window.onload = function () {
 
         calendar += "<div id='calendar_container'>";
         calendar += "<div>";
-        calendar += "<button id='previous' value='"+(new Date(daate.getFullYear(), daate.getMonth() - 1).toDateString())+"'>prev</button>";
-        calendar += "<div id='month_year'>"+ months[daate.getMonth()].name + " " + daate.getFullYear() +"</div>";
-        calendar += "<button id='next' value='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>next</button>";
+            calendar += "<div id='month_year'>";
+            calendar += "<span id='previous' value='"+(new Date(daate.getFullYear(), daate.getMonth() - 1).toDateString())+"'><</span>";
+            calendar +=  "<div>"+months[daate.getMonth()].name + " " + daate.getFullYear()+"</div>";
+            calendar += "<span id='next' value='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>></span>";
+            calendar += "</div>";
         calendar += "</div>";
         calendar += "<table id=''>";
         // generate calendar day names row

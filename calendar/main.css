@@ -1,9 +1,35 @@
 
 #calendar_container {
-    /*width: 350px;*/
+    font-family: arial;
+    margin:2em;
+    width: 250px;
+    border: 1px solid #cccccc;
+    border-radius: .5em;
+    overflow:hidden;
 }
+
+
+#month_year {
+    height: 50px;
+    width:100%;
+    border-bottom: 1px dashed #ccc;
+    background-color: #f0f0f0;
+    text-transform: capitalize;
+
+}
+
+#month_year div {
+    width:200px;
+    float:left;
+}
+
+#previous, #next {
+    padding:.5em;
+}
+
 #calendar table {
-    border: 1px solid pink;
+    margin:auto;
+    width: 250px;
 }
 
 #previous {
