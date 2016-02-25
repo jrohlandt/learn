@@ -4,27 +4,42 @@
     margin:2em;
     width: 250px;
     border: 1px solid #cccccc;
-    border-radius: .5em;
+    border-radius: .3em;
     overflow:hidden;
 }
 
 
-#month_year {
+#calendar_heading {
     height: 50px;
     width:100%;
     border-bottom: 1px dashed #ccc;
     background-color: #f0f0f0;
     text-transform: capitalize;
-
 }
 
-#month_year div {
-    width:200px;
+#month_year {
+
+    width:180px;
     float:left;
 }
 
 #previous, #next {
-    padding:.5em;
+    width:20px;
+    padding:0 5px 0 5px;
+}
+
+#month_year, #previous, #next {
+    height:50px;
+    text-align:center;
+    line-height:50px;
+}
+
+#next {
+    float:right;
+}
+
+#previous {
+    float:left;
 }
 
 #calendar table {

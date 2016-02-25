@@ -105,10 +105,10 @@ window.onload = function () {
 
         calendar += "<div id='calendar_container'>";
         calendar += "<div>";
-            calendar += "<div id='month_year'>";
-            calendar += "<span id='previous' value='"+(new Date(daate.getFullYear(), daate.getMonth() - 1).toDateString())+"'><</span>";
-            calendar +=  "<div>"+months[daate.getMonth()].name + " " + daate.getFullYear()+"</div>";
-            calendar += "<span id='next' value='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>></span>";
+            calendar += "<div id='calendar_heading'>";
+            calendar += "<div id='previous' data-previous_month='"+(new Date(daate.getFullYear(), daate.getMonth() - 1).toDateString())+"'><</div>";
+            calendar +=  "<div id='month_year'>"+months[daate.getMonth()].name + " " + daate.getFullYear()+"</div>";
+            calendar += "<div id='next' data-next_month='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>></div>";
             calendar += "</div>";
         calendar += "</div>";
         calendar += "<table id=''>";
@@ -178,14 +178,14 @@ window.onload = function () {
 
         var prevButton = document.getElementById("previous");
         prevButton.addEventListener("click", function (event) {
-            console.log(prevButton.value);
-            calendarGen(new Date(prevButton.value));
+            console.log(prevButton.dataset.previous_month);
+            calendarGen(new Date(prevButton.dataset.previous_month));
         });
 
         var nextButton = document.getElementById("next");
         nextButton.addEventListener("click", function (event) {
-            console.log(nextButton.value);
-            calendarGen(new Date(nextButton.value));
+            console.log(nextButton.dataset.next_month);
+            calendarGen(new Date(nextButton.dataset.next_month));
         });
     }
 
