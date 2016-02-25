@@ -146,7 +146,7 @@ window.onload = function () {
             }
 
             if (daysOfTheMonth[index].today === true) {
-                row += "<td class='today'>";
+                row += "<td class='today this_month' data-date='"+ daysOfTheMonth[index].day +"' >";
             } else if (daysOfTheMonth[index].currMonth === false) {
                 row += "<td class='not_this_month'>";
             } else {
