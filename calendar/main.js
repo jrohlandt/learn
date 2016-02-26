@@ -98,17 +98,28 @@ window.onload = function () {
         return grid;
     }
 
+    function formatDate(date) {
+        var date = date;
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
 
+        month = (month < 10) ? "0"+month.toString() : month.toString();
+        day = (day < 10) ? "0"+day.toString() : day.toString();
 
-    function calendarGen(daate) {
+        return year.toString() +"-"+ month +"-"+ day;
+    }
+
+    function calendarGen(date) {
         var calendar = "";
 
+        calendar += "<input type='hidden' name='date_picker' id='date_picker' value='' >"
         calendar += "<div id='calendar_container'>";
         calendar += "<div>";
             calendar += "<div id='calendar_heading'>";
-            calendar += "<div id='previous' data-previous_month='"+(new Date(daate.getFullYear(), daate.getMonth() - 1).toDateString())+"'><</div>";
-            calendar +=  "<div id='month_year'>"+months[daate.getMonth()].name + " " + daate.getFullYear()+"</div>";
-            calendar += "<div id='next' data-next_month='"+(new Date(daate.getFullYear(), daate.getMonth() + 1).toDateString())+"'>></div>";
+            calendar += "<div id='previous' data-previous_month='"+(new Date(date.getFullYear(), date.getMonth() - 1).toDateString())+"'><</div>";
+            calendar +=  "<div id='month_year'>"+months[date.getMonth()].name + " " + date.getFullYear()+"</div>";
+            calendar += "<div id='next' data-next_month='"+(new Date(date.getFullYear(), date.getMonth() + 1).toDateString())+"'>></div>";
             calendar += "</div>";
         calendar += "</div>";
         calendar += "<table id=''>";
@@ -125,8 +136,8 @@ window.onload = function () {
         calendar += dayNamesRow;
 
 
-        //var daysOfTheMonth = getDaysOfTheMonth(daate);
-        var daysOfTheMonth = getFullGrid(daate);
+        //var daysOfTheMonth = getDaysOfTheMonth(date);
+        var daysOfTheMonth = getFullGrid(date);
 
         //console.log(daysOfTheMonth);
         var firstDayOfTheMonth = "not_set";
@@ -145,12 +156,13 @@ window.onload = function () {
                 firstDayOfTheMonth = daysOfTheMonth[index].weekDay;
             }
 
+            var onClickDate = new Date(date.getFullYear(), date.getMonth(), daysOfTheMonth[index].day);
             if (daysOfTheMonth[index].today === true) {
-                row += "<td class='today this_month' data-date='"+ daysOfTheMonth[index].day +"' >";
+                row += "<td class='today this_month' data-date='"+ formatDate(onClickDate) +"' >";
             } else if (daysOfTheMonth[index].currMonth === false) {
                 row += "<td class='not_this_month'>";
             } else {
-                row += "<td class='this_month' data-date='"+ daysOfTheMonth[index].day +"' >";
+                row += "<td class='this_month' data-date='"+ formatDate(onClickDate) +"' >";
             }
             row += daysOfTheMonth[index].day+"</td>";
 
@@ -173,6 +185,7 @@ window.onload = function () {
         for (var a = 0; a < activeDates.length; a++) {
             activeDates[a].addEventListener("click", function () {
                 console.log(this.dataset.date);
+                document.getElementById("date_picker").value = this.dataset.date;
             });
         }
 
@@ -189,8 +202,8 @@ window.onload = function () {
         });
     }
 
-    var daate = new Date();
-    calendarGen(daate);
+    var date = new Date();
+    calendarGen(date);
 
 
 
