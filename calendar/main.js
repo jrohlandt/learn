@@ -122,7 +122,7 @@ window.onload = function () {
             calendar += "<div id='next' data-next_month='"+(new Date(date.getFullYear(), date.getMonth() + 1).toDateString())+"'>></div>";
             calendar += "</div>";
         calendar += "</div>";
-        calendar += "<table id=''>";
+        calendar += "<table>";
         // generate calendar day names row
         var day;
         var dayNamesRow = "<thead><tr>";
@@ -130,7 +130,7 @@ window.onload = function () {
             if (!weekDays.hasOwnProperty(day))
                 continue;
 
-            dayNamesRow += "<td>"+weekDays[day].abbreviation+"</td>";
+            dayNamesRow += "<th>"+weekDays[day].abbreviation+"</th>";
         }
         dayNamesRow += "</tr></thead>";
         calendar += dayNamesRow;

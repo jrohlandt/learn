@@ -1,5 +1,6 @@
 
 #calendar_container {
+    text-align:center;
     font-family: arial;
     margin:2em;
     width: 250px;
@@ -12,7 +13,7 @@
 #calendar_heading {
     height: 50px;
     width:100%;
-    border-bottom: 1px dashed #ccc;
+    /*border-bottom: 1px dashed #ccc;*/
     background-color: #f0f0f0;
     text-transform: capitalize;
 }
@@ -25,11 +26,12 @@
 #previous, #next {
     width:20px;
     padding:0 5px 0 5px;
+    cursor: pointer;
+    cursor: hand;
 }
 
 #month_year, #previous, #next {
     height:50px;
-    text-align:center;
     line-height:50px;
 }
 
@@ -44,6 +46,35 @@
 #calendar table {
     margin:auto;
     width: 250px;
+}
+
+
+#calendar thead div {
+    color:red;
+    border-bottom: 1px solid #ccc;
+}
+
+#calendar th {
+    width: 14%;
+    border: 1px solid #ccc;
+    border-left:none;
+    border-top:none;
+    border-bottom:none;
+
+    font-size: .8em;
+}
+
+
+#calendar th:last-of-type {
+    border-right:none;
+}
+
+
+
+#calendar td {
+    font-size: .7em;
+    cursor: pointer;
+    cursor: hand;
 }
 
 #previous {
@@ -61,8 +92,6 @@
 .today {
     color: #2492ff;
 }
-
-
 
 .not_this_month {
     color: #a2a2a2;
