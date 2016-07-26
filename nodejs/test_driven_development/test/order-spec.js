@@ -27,6 +27,11 @@ describe('Ordering Items', function() {
     order.__set__('warehouse', this.warehouse);
   });
 
+  it('should not find non-existing product', function() {
+    order.orderItem('ZZZ', 19);
+    expect(this.console.log.calledWith('Item - ZZZ not found')).to.equal(true);
+  });
+
   it('should order an item when there are enough in stock', function(done) {
     order.orderItem('CCC', 3, function() {
       expect(this.console.log.callCount).to.equal(2);
