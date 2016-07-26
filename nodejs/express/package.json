@@ -1,5 +1,5 @@
 {
-  "name": "ski-dictionay",
+  "name": "ski-dictionary",
   "version": "1.0.0",
   "description": "A collection of skier terms and definitions",
   "main": "app.js",
@@ -17,5 +17,13 @@
     "body-parser": "^1.15.0",
     "cors": "^2.7.1",
     "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "cheerio": "^0.20.0",
+    "nock": "^8.0.0",
+    "rewire": "^2.5.2",
+    "sinon": "^1.17.4",
+    "supertest": "^1.2.0"
   }
 }
