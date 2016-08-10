@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn Vuejs</title>
+</head>
+<body>
+
+    <div id="app">
+        <button type="submit" @click="incrementCounter">
+            Count {{ count }}
+        </button>
+
+        <pre>{{ $data | json }}</pre>
+    </div>
+
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            count: 0
+        },
+        methods: {
+            incrementCounter: function() {
+                this.count += 1;
+            }
+        }
+    });
+</script>
+</body>
+</html>

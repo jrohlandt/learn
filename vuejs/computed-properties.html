@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn Vuejs</title>
+</head>
+<body>
+
+    <h1>{{ fullname }}</h1>
+    <input type="text" v-model="firstname">
+    <input type="text" v-model="lastname">
+
+    <h3>Skill: {{ skill }}</h3>
+    <input type="text" v-model="points">
+
+<script src="js/vue.js"></script>
+<script>
+
+    new Vue({
+        el: 'body',
+
+        data: {
+            firstname: 'Jody',
+            lastname: 'Highroller',
+            points: 60,
+        },
+
+        computed: {
+            skill: function() {
+                if (this.points <= 100) {
+                    return 'Beginner';
+                } else {
+                    return 'Advanced';
+                }
+            },
+            fullname: function() {
+                return this.firstname + ' ' + this.lastname;
+            }
+        }
+    });
+</script>
+</body>
+</html>

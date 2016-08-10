@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn Vuejs</title>
+</head>
+<body>
+
+    <div id="app">
+        <form action="" @submit.prevent="handleIt">
+            <span class="error" v-show="!message">
+                A message is required
+            </span>
+
+            <textarea v-model="message"></textarea>
+
+            <button type="submit" v-show="message">
+                Send message
+            </button>
+        </form>
+
+        <pre>{{ $data | json }}</pre>
+    </div>
+
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: ''
+        },
+        methods: {
+            handleIt: function() {
+                console.log('Handled');
+            }
+        }
+    });
+</script>
+</body>
+</html>
