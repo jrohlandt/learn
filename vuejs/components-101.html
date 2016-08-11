@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn Vuejs</title>
+    <style>
+        .completed { text-decoration: line-through; }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <tasks v-bind:list="tasks"></tasks>
+    </div>
+
+    <template id="tasks-template">
+        <h1>My tasks <span v-show="remaining">({{ remaining }})</span></h1>
+        <input type="text" >
+        <ul v-show="list.length">
+            <li
+                v-bind:class="{ 'completed': task.completed }"
+                v-for="task in list"
+                v-on:click="toggleCompletion(task)"
+            >
+                {{ task.body }}
+            <strong v-on:click="deleteTask(task)">x</strong>
+            </li>
+        </ul>
+        <p v-else>
+            there are no tasks
+        </p>
+    </template>
+
+<script src="js/vue.js"></script>
+<script>
+
+    new Vue({
+        el: '#app',
+
+        data: {
+            tasks: [
+                { body: 'Go to the bank', completed: true },
+                { body: 'Go to the store', completed: false },
+                { body: 'Prune tree', completed: false }
+            ]
+        },
+
+        components: {
+            tasks: {
+                template: '#tasks-template',
+
+                props: ['list'],
+
+                methods: {
+                    toggleCompletion: function(task) {
+                        task.completed = task.completed ? false : true;
+                    },
+
+                    deleteTask: function(task) {
+                        this.list.$remove(task);
+                    }
+                },
+
+                computed: {
+                    remaining: function() {
+                        return this.list.filter(function(task) {
+                            if (task.completed === false) {
+                                return task;
+                            }
+                        }).length;
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
