@@ -1,6 +1,18 @@
-Vue.component('tasks', {
-    template: '#tasks-template',
 
+<template>
+    <h1>My Tasks</h1>
+    <ul class="list-group">
+        <li
+            class="list-group-item"
+            v-for="task in list"
+        >
+            {{ task.body }}
+        </li>
+    </ul>
+</template>
+
+<script>
+export default {
     props: {
         list: {
             type: Array,
@@ -17,8 +29,12 @@ Vue.component('tasks', {
             console.log('an error occurred');
         });
     }
-});
+};
+</script>
 
-new Vue({
-    el: 'body'
-});
+<style lang="sass">
+.list-group-item {
+    padding: 1em;
+}
+
+</style>

@@ -15,20 +15,8 @@
                 hello
             </alert>
 
-            <!-- <tasks></tasks> -->
+            <tasks></tasks>
         </div>
-
-        <template id="tasks-template">
-            <h1>My Tasks</h1>
-            <ul class="list-group">
-                <li
-                    class="list-group-item"
-                    v-for="task in list"
-                >
-                    @{{ task.body }}
-                </li>
-            </ul>
-        </template>
 
         <script src="/js/main.js"></script>
     </body>
