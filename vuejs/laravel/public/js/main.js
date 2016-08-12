@@ -11,9 +11,11 @@ Vue.component('tasks', {
     },
 
     created: function() {
-        $.getJSON('api/tasks', function(tasks) {
-            this.list = tasks;
-        }.bind(this));
+        this.$http.get('api/tasks').then(function(tasks) {
+            this.list = tasks.json();
+        }, function(tasks) {
+            console.log('an error occurred');
+        });
     }
 });
 

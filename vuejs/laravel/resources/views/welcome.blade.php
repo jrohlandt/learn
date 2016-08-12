@@ -31,8 +31,8 @@
             </ul>
         </template>
 
-        <script src="/js/jquery.js"></script>
         <script src="/js/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/vue.resource/0.9.3/vue-resource.min.js"></script>
         <script src="/js/main.js"></script>
     </body>
 </html>
