@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn Vuejs</title>
+    <style>
+        .completed { text-decoration: line-through; }
+
+        .alert {
+            position: relative;
+            background: #ddd;
+            border: 1px solid black;
+            padding: 1em;
+        }
+
+        .alert-success {
+            background: green;
+        }
+
+        .alert-error {
+            background: red;
+        }
+
+        .alert-close {
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <alert v-bind:show="showSuccess" type="success">
+            Task successfully added!
+        </alert>
+        <alert v-bind:show="showError" type="error">
+            Task could not be added.
+        </alert>
+        <tasks v-bind:list="tasks"></tasks>
+    </div>
+
+    <template id="alert-template">
+        <div
+            v-bind:class="alertClasses"
+            v-show="show"
+        >
+            <slot></slot>
+            <span class="alert-close" v-on:click="show = false">x</span>
+        </div>
+    </template>
+
+    <template id="tasks-template">
+        <h1>My tasks <span v-show="remaining">({{ remaining }})</span></h1>
+        <form v-on:submit.prevent="addTask">
+            <input type="text" name="taskName" placeholder="Add a new task">
+            <button type="submit" name="button">Add</button>
+        </form>
+        <div  v-show="list.length">
+            <ul>
+                <li
+                    v-bind:class="{ 'completed': task.completed }"
+                    v-for="task in list"
+                    v-on:click="toggleCompletion(task)"
+                >
+                    {{ task.body }}
+                    <strong v-on:click="deleteTask(task)">x</strong>
+                </li>
+            </ul>
+            <div class="filter-links">
+                <ul>
+                    <li><a href="#" v-on:click.prevent="showAll">All</a></li>
+                    <li><a href="#" v-on:click.prevent="showCompleted">Completed</a></li>
+                    <li><a href="#" v-on:click.prevent="showInProgress">In Progress</a></li>
+                </ul>
+            </div>
+        </div>
+        <p v-else>
+            there are no tasks
+        </p>
+    </template>
+
+<script src="js/vue.js"></script>
+<script>
+
+    var tasks = [
+        { body: 'Go to the bank', completed: true },
+        { body: 'Go to the store', completed: false },
+        { body: 'Prune tree', completed: false }
+    ];
+
+    new Vue({
+        el: '#app',
+
+        data: {
+            tasks: tasks,
+            showSuccess: false,
+            showError: false
+        },
+
+        events: {
+            'showSuccess': function() {
+                this.showSuccess = true;
+                this.showError = false;
+            },
+            'showError': function() {
+                this.showError = true;
+                this.showSuccess = false;
+            }
+        },
+
+        components: {
+            alert: {
+                template: '#alert-template',
+
+                props: {
+                    type: {
+
+                    },
+                    show: {
+                        default: false
+                    }
+                },
+
+                computed: {
+                    alertClasses: function() {
+                        var type = this.type;
+
+                        return {
+                            'alert': true,
+                            'alert-success': type === 'success',
+                            'alert-error': type === 'error'
+                        }
+                    }
+                }
+            },
+
+            tasks: {
+                template: '#tasks-template',
+
+                props: ['list'],
+
+                methods: {
+                    toggleCompletion: function(task) {
+                        task.completed = task.completed ? false : true;
+                    },
+
+                    addTask: function(e) {
+                        if (e.target.taskName.value !== '') {
+                            this.list.push({body: e.target.taskName.value, completed: false});
+                            e.target.taskName.value = '';
+                            this.$dispatch('showSuccess');
+                        } else {
+                            this.$dispatch('showError');
+                        }
+                    },
+
+                    deleteTask: function(task) {
+                        this.list.$remove(task);
+                    },
+
+                    showAll: function() {
+                        this.list = tasks;
+                    },
+
+                    showCompleted: function() {
+                        this.list = tasks.filter(function(task) {
+                            if (task.completed === true) {
+                                return task;
+                            }
+                        });
+                    },
+
+                    showInProgress: function() {
+                        this.list = tasks.filter(function(task) {
+                            if (task.completed === false) {
+                                return task;
+                            }
+                        });
+                    }
+                },
+
+                computed: {
+                    remaining: function() {
+                        return this.list.filter(function(task) {
+                            if (task.completed === false) {
+                                return task;
+                            }
+                        }).length;
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
