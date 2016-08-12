@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c284a9c122da36c99a8b6597bdce7aa6",
-    "content-hash": "8b1485987e7c5949da82435d403e52e8",
+    "hash": "2b93fceb2e8c63ca0291981d6c4428e4",
+    "content-hash": "7d2634b69027bc42fb4d03c919e4a3b1",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1929,6 +1929,50 @@
             "time": "2015-05-11 14:41:42"
         },
         {
+            "name": "laravel/elixir",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/elixir.git",
+                "reference": "e1a8b0580c0f66b595a228eb2e34585f570eb771"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/elixir/zipball/e1a8b0580c0f66b595a228eb2e34585f570eb771",
+                "reference": "e1a8b0580c0f66b595a228eb2e34585f570eb771",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "time": "2014-10-14 17:59:08"
+        },
+        {
             "name": "mockery/mockery",
             "version": "0.9.5",
             "source": {
@@ -3155,7 +3199,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "laravel/elixir": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
