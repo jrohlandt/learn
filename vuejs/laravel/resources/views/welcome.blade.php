@@ -3,20 +3,19 @@
     <head>
         <title>Laravel</title>
 
-        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
-        <style media="screen">
-            .list-group {
-
-            }
-
-            .list-group-item {
-                padding: 1em;
-            }
-        </style>
+        <link href="/css/app.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div class="container">
-            <tasks></tasks>
+            <alert type="success">
+                hello
+            </alert>
+
+            <alert type="error">
+                hello
+            </alert>
+
+            <!-- <tasks></tasks> -->
         </div>
 
         <template id="tasks-template">
@@ -31,8 +30,6 @@
             </ul>
         </template>
 
-        <script src="/js/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/vue.resource/0.9.3/vue-resource.min.js"></script>
         <script src="/js/main.js"></script>
     </body>
 </html>
