@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn Vuejs</title>
+
+    <style media="screen">
+        .alert {
+            position: relative;
+            background: #ddd;
+            border: 1px solid black;
+            padding: 1em;
+        }
+
+        .alert-success {
+            background: green;
+        }
+
+        .alert-error {
+            background: red;
+        }
+
+        .alert-close {
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <alert type="success">
+            hello
+        </alert>
+        <alert type="error">
+            hello
+        </alert>
+
+    </div>
+
+<template id="alert-template">
+    <div
+        v-bind:class="alertClasses"
+        v-show="show"
+    >
+        <slot></slot>
+        <span class="alert-close" v-on:click="show = false">x</span>
+    </div>
+</template>
+
+<script src="js/vue.js"></script>
+<script>
+    Vue.component('alert', {
+        template: '#alert-template',
+
+        props: ['type'],
+
+        data: function() {
+            return {
+                show: true
+            };
+        },
+
+        computed: {
+            alertClasses: function() {
+                // ['alert', type === 'success' ? 'alert-success' : '']
+                var type = this.type;
+
+                return {
+                    'alert': true,
+                    'alert-success': type === 'success',
+                    'alert-error': type === 'error'
+                }
+            }
+        }
+    });
+
+    new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>
