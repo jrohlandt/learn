@@ -16,6 +16,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function() {
+    return view('home');
+});
+
+Route::get('/about', function() {
+    return view('about');
+});
+
 Route::get('/api/tasks', function() {
     return App\Task::latest()->get();
 });

@@ -11873,7 +11873,63 @@ exports.insert = function (css) {
 
 },{}],6:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("/* line 2, stdin */\n.alert {\n  position: relative;\n  background: #ddd;\n  border: 1px solid black;\n  padding: 1em; }\n\n/* line 9, stdin */\n.alert-success {\n  background: green; }\n\n/* line 13, stdin */\n.alert-error {\n  background: red; }\n\n/* line 17, stdin */\n.alert-close {\n  position: absolute;\n  top: 1em;\n  right: 1em;\n  font-weight: bold;\n  cursor: pointer; }\n")
+var __vueify_style__ = __vueify_insert__.insert("/* line 2, stdin */\n.list-group-item {\n  padding: 1em; }\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    created: function created() {
+        console.log('about view');
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.dispose(function () {
+    __vueify_insert__.cache["/* line 2, stdin */\n.list-group-item {\n  padding: 1em; }\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-80104afc", module.exports)
+  } else {
+    hotAPI.update("_v-80104afc", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],7:[function(require,module,exports){
+var __vueify_insert__ = require("vueify/lib/insert-css")
+var __vueify_style__ = __vueify_insert__.insert("/* line 2, stdin */\n.list-group-item {\n  padding: 1em; }\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    created: function created() {
+        console.log('home view');
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.dispose(function () {
+    __vueify_insert__.cache["/* line 2, stdin */\n.list-group-item {\n  padding: 1em; }\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-a7bc06b8", module.exports)
+  } else {
+    hotAPI.update("_v-a7bc06b8", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],8:[function(require,module,exports){
+var __vueify_insert__ = require("vueify/lib/insert-css")
+var __vueify_style__ = __vueify_insert__.insert("/* line 2, stdin */\n.alert {\n  position: relative;\n  background: #ddd;\n  border: 1px solid black;\n  padding: 1em; }\n\n/* line 9, stdin */\n.alert-success {\n  background: green; }\n\n/* line 13, stdin */\n.alert-error {\n  background: red; }\n\n/* line 17, stdin */\n.alert-close {\n  position: absolute;\n  top: 1em;\n  right: 1em;\n  font-weight: bold;\n  cursor: pointer; }\n\n/* line 25, stdin */\n.alert-fade-transition {\n  -webkit-transition: 1s ease;\n  transition: 1s ease; }\n\n/* line 29, stdin */\n.alert-fade-leave {\n  opacity: 0; }\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11881,12 +11937,26 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
 
-    props: ['type'],
+    props: {
+        type: { default: 'info' },
+        timeout: { default: 3000 },
+        important: {
+            type: Boolean,
+            default: false
+        }
+    },
 
+    ready: function ready() {
+        var _this = this;
+
+        if (!this.important) {
+            setTimeout(function () {
+                return _this.show = false;
+            }, this.timeout);
+        }
+    },
     data: function data() {
-        return {
-            show: true
-        };
+        return { show: true };
     },
 
 
@@ -11904,13 +11974,13 @@ exports.default = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div v-bind:class=\"alertClasses\" v-show=\"show\">\n    <slot></slot>\n    <span class=\"alert-close\" v-on:click=\"show = false\">x</span>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div v-bind:class=\"alertClasses\" v-show=\"show\" transition=\"alert-fade\">\n    <slot></slot>\n    <span class=\"alert-close\" v-on:click=\"show = false\" v-show=\"important\">\n        x\n    </span>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.dispose(function () {
-    __vueify_insert__.cache["/* line 2, stdin */\n.alert {\n  position: relative;\n  background: #ddd;\n  border: 1px solid black;\n  padding: 1em; }\n\n/* line 9, stdin */\n.alert-success {\n  background: green; }\n\n/* line 13, stdin */\n.alert-error {\n  background: red; }\n\n/* line 17, stdin */\n.alert-close {\n  position: absolute;\n  top: 1em;\n  right: 1em;\n  font-weight: bold;\n  cursor: pointer; }\n"] = false
+    __vueify_insert__.cache["/* line 2, stdin */\n.alert {\n  position: relative;\n  background: #ddd;\n  border: 1px solid black;\n  padding: 1em; }\n\n/* line 9, stdin */\n.alert-success {\n  background: green; }\n\n/* line 13, stdin */\n.alert-error {\n  background: red; }\n\n/* line 17, stdin */\n.alert-close {\n  position: absolute;\n  top: 1em;\n  right: 1em;\n  font-weight: bold;\n  cursor: pointer; }\n\n/* line 25, stdin */\n.alert-fade-transition {\n  -webkit-transition: 1s ease;\n  transition: 1s ease; }\n\n/* line 29, stdin */\n.alert-fade-leave {\n  opacity: 0; }\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
@@ -11919,7 +11989,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-c23f11a8", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],7:[function(require,module,exports){
+},{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],9:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("/* line 2, stdin */\n.list-group-item {\n  padding: 1em; }\n")
 'use strict';
@@ -11961,7 +12031,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-01df005e", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],8:[function(require,module,exports){
+},{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}],10:[function(require,module,exports){
 'use strict';
 
 var _alert = require('./components/alert.vue');
@@ -11971,6 +12041,14 @@ var _alert2 = _interopRequireDefault(_alert);
 var _tasks = require('./components/tasks.vue');
 
 var _tasks2 = _interopRequireDefault(_tasks);
+
+var _HomeView = require('./components/HomeView.vue');
+
+var _HomeView2 = _interopRequireDefault(_HomeView);
+
+var _AboutView = require('./components/AboutView.vue');
+
+var _AboutView2 = _interopRequireDefault(_AboutView);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11982,7 +12060,10 @@ new Vue({
     el: 'body',
 
     components: {
-        alert: _alert2.default, tasks: _tasks2.default
+        alert: _alert2.default,
+        tasks: _tasks2.default,
+        HomeView: _HomeView2.default,
+        AboutView: _AboutView2.default
     },
 
     ready: function ready() {
@@ -11990,6 +12071,6 @@ new Vue({
     }
 });
 
-},{"./components/alert.vue":6,"./components/tasks.vue":7,"vue":4,"vue-resource":3}]},{},[8]);
+},{"./components/AboutView.vue":6,"./components/HomeView.vue":7,"./components/alert.vue":8,"./components/tasks.vue":9,"vue":4,"vue-resource":3}]},{},[10]);
 
 //# sourceMappingURL=main.js.map
