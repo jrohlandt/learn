@@ -1,3 +1,5 @@
+// Primitives are passed around by value and Objects by reference
+
 // By Value (primitives)
 
 var a = 3;
