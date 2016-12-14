@@ -2,12 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { fetchTweets } from "../actions/tweetsActions";
-@connect((store) => {
-    return {
-        tweets: store.tweets.tweets
-    }
-})
-export default class Layout extends React.Component {
+// @connect((store) => {
+//     return {
+//         tweets: store.tweets.tweets
+//     }
+// })
+
+class Layout extends React.Component {
     // componentWillMount() {
     //     // this.props.dispatch(fetchTweets());
     // }
@@ -30,3 +31,5 @@ export default class Layout extends React.Component {
         </div>
     }
 }
+
+export default connect(store => ({tweets: store.tweets.tweets}))(Layout);

@@ -23160,11 +23160,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.default = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _dec, _class;
 
 	var _react = __webpack_require__(1);
 
@@ -23182,11 +23179,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Layout = (_dec = (0, _reactRedux.connect)(function (store) {
-	    return {
-	        tweets: store.tweets.tweets
-	    };
-	}), _dec(_class = function (_React$Component) {
+	// @connect((store) => {
+	//     return {
+	//         tweets: store.tweets.tweets
+	//     }
+	// })
+
+	var Layout = function (_React$Component) {
 	    _inherits(Layout, _React$Component);
 
 	    function Layout() {
@@ -23240,8 +23239,11 @@
 	    }]);
 
 	    return Layout;
-	}(_react2.default.Component)) || _class);
-	exports.default = Layout;
+	}(_react2.default.Component);
+
+	exports.default = (0, _reactRedux.connect)(function (store) {
+	    return { tweets: store.tweets.tweets };
+	})(Layout);
 
 /***/ },
 /* 209 */
