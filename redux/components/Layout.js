@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from "react"
+import { connect } from "react-redux"
 
-import { fetchTweets } from "../actions/tweetsActions";
+import { fetchTweets } from "../actions/tweetsActions"
 // @connect((store) => {
 //     return {
 //         tweets: store.tweets.tweets
@@ -14,7 +14,7 @@ class Layout extends React.Component {
     // }
 
     fetchTweets() {
-        this.props.dispatch(fetchTweets());
+        this.props.dispatch(fetchTweets())
     }
 
     render() {
@@ -24,7 +24,7 @@ class Layout extends React.Component {
             return <button onClick={this.fetchTweets.bind(this)}>Load Tweets</button>
         }
 
-        const mappedTweets = tweets.map(tweet => <li>{tweet.text}</li>);
+        const mappedTweets = tweets.map(tweet => <li>{tweet.text}</li>)
 
         return <div>
             <ul>{mappedTweets}</ul>
@@ -32,4 +32,4 @@ class Layout extends React.Component {
     }
 }
 
-export default connect(store => ({tweets: store.tweets.tweets}))(Layout);
+export default connect(store => ({tweets: store.tweets.tweets}))(Layout)
